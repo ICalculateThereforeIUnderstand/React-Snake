@@ -1,0 +1,206 @@
+$boja-displaya: #444444;
+$boja-tijela: #64f227;
+
+@mixin border($sirina, $boja) {
+    border-style: solid;
+    border-width: $sirina;
+    border-color: $boja;
+}
+
+#okvir {
+    /*height: 600px;
+    width: 760px;*/
+    background-color: red;
+    margin: 100px auto 0px auto;
+    user-select: none;
+    position: relative;
+    
+    #display-el {
+        height: 100px;
+        width: 100%;
+        background-color: green;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    
+    #display {
+        /*height: 500px;
+        width: 750px;*/
+        background-color: $boja-displaya;
+        @include border(5px, blue);
+        margin: 0px auto 0px auto;
+        
+        display: grid;
+        /*grid-template-rows: repeat(20, 25px);
+        grid-template-columns: repeat(30, 25px);*/
+        grid-auto-flow: row;
+        position: relative;
+    }
+}
+
+
+#displaybodova {
+    height: 60px;
+    width: 200px;
+    /*background-color: yellow;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    
+    #displaybodova-tekst, #displaybodova-score {
+        display: inline-block;
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 10px;
+        color: #a16a05;
+    }
+    
+}
+
+.meta {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    
+    @mixin meta-el {
+        height: 47%;
+        width: 47%;
+        background-color: red;
+    }
+    
+    .meta-el1 {
+        @include meta-el;
+        border-radius: 40% 40% 0px 40%;
+    }
+    
+    .meta-el2 {
+        @include meta-el;
+        border-radius: 40% 40% 40% 0px;
+    }
+    
+    .meta-el3 {
+        @include meta-el;
+        border-radius: 40% 0px 40% 40%;
+    }
+    
+    .meta-el4 {
+        @include meta-el;
+        border-radius: 0px 40% 40% 40%;
+    }
+}
+
+.glava {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    /*background-color: blue;*/
+    position: relative;
+    
+    .glava-el1 {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        background-color: $boja-tijela;
+        position: absolute;
+    }
+    
+    .glava-el2 {
+        background-color: $boja-tijela;
+        position: absolute;
+        /*top: 0px;
+        left: 0px;
+        height: 50%;
+        width: 100%;*/
+    }
+}
+
+.skretanje {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    /*background-color: blue;*/
+    position: relative;
+    
+    .skretanje-el {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        background-color: $boja-tijela;
+        position: absolute;
+    }
+    
+    .skretanje-el1, .skretanje-el2, .skretanje-el3 {
+        height: 50%;
+        width: 50%;
+        position: absolute;
+        background-color: $boja-tijela;
+    }
+     
+}
+
+#gameover-ekran {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    background-color: rgba(5, 37, 136, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #gameover-ekran-naslov {
+        font-family: sans-serif;
+        font-size: 50px;
+        font-weight: 600;
+        color: #aaaaaa;
+        display: inline-block;
+        /*background-color: white;*/
+    }
+            
+    #gameover-ekran-uputa {
+        font-family: sans-serif;
+        font-size: 25px;
+        color: white;
+        display: inline-block;
+        /*background-color: pink;*/
+        margin-top: 20px;
+        
+    } 
+          
+
+}
+
+ 
+
+
+
+
+#pokus {
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+}
+
+#pokus1 {
+    height: 600px;
+    width: 600px;
+    background-color: yellow;
+}
+
+
+
+
+

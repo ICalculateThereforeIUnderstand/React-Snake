@@ -1,1 +1,173 @@
+#okvir {
+  /*height: 600px;
+  width: 760px;*/
+  background-color: red;
+  margin: 100px auto 0px auto;
+  user-select: none;
+  position: relative;
+}
+#okvir #display-el {
+  height: 100px;
+  width: 100%;
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#okvir #display {
+  /*height: 500px;
+  width: 750px;*/
+  background-color: #444444;
+  border-style: solid;
+  border-width: 5px;
+  border-color: blue;
+  margin: 0px auto 0px auto;
+  display: grid;
+  /*grid-template-rows: repeat(20, 25px);
+  grid-template-columns: repeat(30, 25px);*/
+  grid-auto-flow: row;
+  position: relative;
+}
 
+#displaybodova {
+  height: 60px;
+  width: 200px;
+  /*background-color: yellow;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+}
+#displaybodova #displaybodova-tekst, #displaybodova #displaybodova-score {
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px;
+  color: #a16a05;
+}
+
+.meta {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+}
+.meta .meta-el1 {
+  height: 47%;
+  width: 47%;
+  background-color: red;
+  border-radius: 40% 40% 0px 40%;
+}
+.meta .meta-el2 {
+  height: 47%;
+  width: 47%;
+  background-color: red;
+  border-radius: 40% 40% 40% 0px;
+}
+.meta .meta-el3 {
+  height: 47%;
+  width: 47%;
+  background-color: red;
+  border-radius: 40% 0px 40% 40%;
+}
+.meta .meta-el4 {
+  height: 47%;
+  width: 47%;
+  background-color: red;
+  border-radius: 0px 40% 40% 40%;
+}
+
+.glava {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  /*background-color: blue;*/
+  position: relative;
+}
+.glava .glava-el1 {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-color: #64f227;
+  position: absolute;
+}
+.glava .glava-el2 {
+  background-color: #64f227;
+  position: absolute;
+  /*top: 0px;
+  left: 0px;
+  height: 50%;
+  width: 100%;*/
+}
+
+.skretanje {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  /*background-color: blue;*/
+  position: relative;
+}
+.skretanje .skretanje-el {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-color: #64f227;
+  position: absolute;
+}
+.skretanje .skretanje-el1, .skretanje .skretanje-el2, .skretanje .skretanje-el3 {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  background-color: #64f227;
+}
+
+#gameover-ekran {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  background-color: rgba(5, 37, 136, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#gameover-ekran #gameover-ekran-naslov {
+  font-family: sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  color: #aaaaaa;
+  display: inline-block;
+  /*background-color: white;*/
+}
+#gameover-ekran #gameover-ekran-uputa {
+  font-family: sans-serif;
+  font-size: 25px;
+  color: white;
+  display: inline-block;
+  /*background-color: pink;*/
+  margin-top: 20px;
+}
+
+#pokus {
+  height: 100px;
+  width: 100px;
+  background-color: yellow;
+}
+
+#pokus1 {
+  height: 600px;
+  width: 600px;
+  background-color: yellow;
+}
+
+/*# sourceMappingURL=index.css.map */
