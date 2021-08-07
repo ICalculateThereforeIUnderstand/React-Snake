@@ -7,7 +7,8 @@ class Engine {
 		this.stanjeZmije = this.inicirajZmiju();
 		this.pozicijaMete = null;                 //  pozicija mete na displayu
 		this.smjer = "d";  //  g, d, do, l je za gore, desno, dolje, lijevo, smjer kojim ide glava zmije
-		this.noviSmjer = this.smjer;
+		this.noviSmjer = null;
+		this.noviSmjer1 = null;
 		
 		this.vrhRepaZmije = null;  //  zadnje polje zmije u prosloj iteraciji, sluzi brisanje polja, ako je null, ne brisati
 		this.visinaDisplaya = _visinaDisplaya;
@@ -41,14 +42,15 @@ class Engine {
 	    //setTimeout(() => {	
 		    this.stanjeZmije = this.inicirajZmiju();
 		    this.smjer = "d";
-		    this.noviSmjer = this.smjer;
+		    this.noviSmjer = null;
+		    this.noviSmjer1 = null;
 		    //this.promijeniPolje([[2,1,7], [4,1,8], [6,1,9], [8,1,10]]);
 		    this.postaviZmiju();
 		
 		    /*setTimeout(() => {
 		        this.postaviZmiju();
 		    }, [10]);*/
-		    this.intervalRef = setInterval(this.pomakniZmiju, 150);
+		    this.intervalRef = setInterval(this.pomakniZmiju, 80);
 	    //}, 10);  	
 	}
 	
@@ -67,7 +69,11 @@ class Engine {
 		[x, y] = this.stanjeZmije[this.stanjeZmije.length-1];
 		this.vrhRepaZmije = [...this.stanjeZmije[0]];
 		
-		this.smjer = this.noviSmjer;
+		if (this.noviSmjer !== null) {
+			this.smjer = this.noviSmjer;
+			this.noviSmjer = this.noviSmjer1;
+			this.noviSmjer1 = null;
+		}
 		
 		switch (this.smjer) {
 			case ("g"):
@@ -234,23 +240,39 @@ class Engine {
 	
 	pritisakGumba(ev) {	
 		ev.preventDefault();
-		if (!this.keyDown) {
+		if (true ||  !this.keyDown) {
 		    switch (ev.code) {
 		        case ("ArrowUp"):
 		            this.keyDown = "ArrowUp";
-		            if (this.smjer === "l" ||  this.smjer === "d")  this.noviSmjer = "g";
+		            if (this.noviSmjer === null) {
+						if (this.smjer === "l" ||  this.smjer === "d")  this.noviSmjer = "g";
+					} else if (this.noviSmjer1 === null) {
+						if (this.noviSmjer === "l" ||  this.noviSmjer === "d")  this.noviSmjer1 = "g";
+					}
 		            break;
 		        case ("ArrowDown"):
 		            this.keyDown = "ArrowDown";
-		            if (this.smjer === "l" ||  this.smjer === "d")  this.noviSmjer = "do";
+		            if (this.noviSmjer === null) {
+		                if (this.smjer === "l" ||  this.smjer === "d")  this.noviSmjer = "do";
+		            } else if (this.noviSmjer1 === null) {
+						if (this.noviSmjer === "l" ||  this.noviSmjer === "d")  this.noviSmjer1 = "do";
+					}
 		            break;
 		        case ("ArrowLeft"):
 		            this.keyDown = "ArrowLeft";
-		            if (this.smjer === "g" ||  this.smjer === "do")  this.noviSmjer = "l";
+		            if (this.noviSmjer === null) {
+		                if (this.smjer === "g" ||  this.smjer === "do")  this.noviSmjer = "l";
+		            } else if (this.noviSmjer1 === null) {
+						if (this.noviSmjer === "g" ||  this.noviSmjer === "do")  this.noviSmjer1 = "l";
+					}
 		            break;
 		        case ("ArrowRight"):
 		            this.keyDown = "ArrowRight";
-		            if (this.smjer === "g" ||  this.smjer === "do")  this.noviSmjer = "d";
+		            if (this.noviSmjer === null) {
+		                if (this.smjer === "g" ||  this.smjer === "do")  this.noviSmjer = "d";
+		            } else if (this.noviSmjer1 === null){
+						if (this.noviSmjer === "g" ||  this.noviSmjer === "do")  this.noviSmjer1 = "d";
+					}
 		            break;
 		    }
 	    }
