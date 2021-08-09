@@ -126,7 +126,7 @@
   background-color: #64f227;
 }
 
-#gameover-ekran {
+.gameover-ekran {
   height: 100%;
   width: 100%;
   background-color: red;
@@ -141,7 +141,7 @@
   align-items: center;
   justify-content: center;
 }
-#gameover-ekran #gameover-ekran-naslov {
+.gameover-ekran .gameover-ekran-naslov {
   font-family: sans-serif;
   font-size: 50px;
   font-weight: 600;
@@ -149,7 +149,15 @@
   display: inline-block;
   /*background-color: white;*/
 }
-#gameover-ekran #gameover-ekran-uputa {
+.gameover-ekran .gameover-ekran-naslov1 {
+  font-family: sans-serif;
+  font-size: 100px;
+  font-weight: 600;
+  color: #aaaaaa;
+  display: inline-block;
+  /*background-color: white;*/
+}
+.gameover-ekran .gameover-ekran-uputa {
   font-family: sans-serif;
   font-size: 25px;
   color: white;

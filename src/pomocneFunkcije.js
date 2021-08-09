@@ -113,9 +113,9 @@ export function kreirajGlavu(polje, strana) {
 export function ukloniDijete(parent) {
 	if (parent.children.length === 1) {
 		parent.removeChild(parent.childNodes[0]);
-		console.log("dijete je uklonjeno");
+		//console.log("dijete je uklonjeno");
 	} else if (parent.children.length === 0) {
-		console.log("djeteta nema");
+		//console.log("djeteta nema");
 	} else {
 		alert("cini se da je nesto pogresno, imas vise djece u elementu");
 	}

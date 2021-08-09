@@ -32,6 +32,10 @@ class Engine {
 	startaj() {
 		console.log("startali smo engine");
 		
+		this.that.setState({startSw: true});
+		setTimeout(()=> {this.that.setState({startSw: false})}, 4000);
+		
+	  setTimeout(() => {	
 		this.obrisiZmiju();
 		
 		if (this.pozicijaMete !== null)  this.promijeniPolje([[...this.pozicijaMete, 0]]);
@@ -51,7 +55,9 @@ class Engine {
 		        this.postaviZmiju();
 		    }, [10]);*/
 		    this.intervalRef = setInterval(this.pomakniZmiju, 80);
-	    //}, 10);  	
+	    //}, 10); 
+	  }, 4100);   
+	    	
 	}
 	
 	postaviMetu() {
@@ -113,6 +119,9 @@ class Engine {
 		    this.postaviZmiju();
 			//alert("Game over");
 			clearInterval(this.intervalRef);
+			if (this.that.state.score > this.that.state.bestScore) {
+				this.that.setState({bestScore: this.that.state.score});	
+			}
 			this.that.setState({gameOverSw: true});
 		}
 	}
@@ -135,7 +144,7 @@ class Engine {
 		var pozicije = [];
 		if (this.vrhRepaZmije !== null) {
 			pozicije.push([...this.vrhRepaZmije, 0]);
-			console.log("ubacili smo brisanje na " + pozicije[0]);
+			//console.log("ubacili smo brisanje na " + pozicije[0]);
 			this.vrhRepaZmije = null;
 		}
 		var dulj = this.stanjeZmije.length;
@@ -274,6 +283,14 @@ class Engine {
 						if (this.noviSmjer === "g" ||  this.noviSmjer === "do")  this.noviSmjer1 = "d";
 					}
 		            break;
+		        case ("KeyG"):
+		            this.keyDown = "KeyG";
+		            clearInterval(this.intervalRef);
+			        if (this.that.state.score > this.that.state.bestScore) {
+				        this.that.setState({bestScore: this.that.state.score});	
+			        }
+			        this.that.setState({gameOverSw: true});
+			        break;
 		    }
 	    }
 	}
@@ -299,6 +316,11 @@ class Engine {
 		            break;
 		        case ("ArrowRight"):
 		            if (this.keyDown === "ArrowRight") {
+						this.keyDown = false;
+					}
+		            break;
+		        case ("KeyG"):
+		            if (this.keyDown === "KeyG") {
 						this.keyDown = false;
 					}
 		            break;

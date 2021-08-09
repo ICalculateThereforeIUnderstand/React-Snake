@@ -8,7 +8,7 @@ var _sirinaPolja = 25;
 var _visinaDisplaya = 20;
 var _sirinaDisplaya = 30;
 
-function DisplayBodova({tekst, bodovi}) {
+function DisplayBodov({tekst, bodovi}) {
 	
 	var prikaz = "";
 	if (bodovi < 10) {
@@ -19,6 +19,8 @@ function DisplayBodova({tekst, bodovi}) {
 		prikaz = bodovi;
 	}
 	
+	console.log("renderam DisplayBodova " + Math.random());
+	
 	return (
 	    <div id="displaybodova">
 	        <p id="displaybodova-tekst">{tekst}</p>
@@ -26,6 +28,8 @@ function DisplayBodova({tekst, bodovi}) {
 	    </div>
 	)
 }
+
+var DisplayBodova = React.memo(DisplayBodov);
 
 function Skretanje() {
 	return (
@@ -38,7 +42,7 @@ function Skretanje() {
 	)
 }
 
-function GameOverEkran({sw, klik}) {
+function GameOverEkra({sw, klik}) {
 	const  r = React.useRef();
 	
 	React.useEffect(() => {
@@ -49,13 +53,66 @@ function GameOverEkran({sw, klik}) {
 		}
 	}, [sw]);
 	
+	console.log("renderam GameOverEkran " + Math.random());
+	
 	return (
-	    <div onClick={klik} ref={r} id="gameover-ekran">
-	        <div id="gameover-ekran-naslov">GAME OVER</div>
-	        <div id="gameover-ekran-uputa">Click Display For Restart</div>
+	    <div onClick={klik} ref={r} className="gameover-ekran">
+	        <div className="gameover-ekran-naslov">GAME OVER</div>
+	        <div className="gameover-ekran-uputa">Click Display For Restart</div>
 	    </div>
 	)
 }
+
+var GameOverEkran = React.memo(GameOverEkra);
+
+function StartEkra({sw}) {
+	const [br, setBr] = React.useState(0);
+	const  r = React.useRef();
+		
+	React.useEffect( () => {
+		if (sw && true) {
+			dodajStilove(r.current, {display: "flex"});
+			setBr(3);
+			console.log("startali startekran");
+		} else {
+			//dodajStilove(r.current, {display: "none"});
+		}
+		
+		if (!sw)  dodajStilove(r.current, {display: "none"});
+	}, [sw]);
+	
+	React.useEffect( ()=> {
+		if (br > 0) {
+			console.log("br je " + br);
+			var brr = br - 1;
+			console.log("brr je " + brr);
+			
+			if (br !== 0) {
+				setTimeout(()=> {setBr(brr)}, 1000);
+			} else {
+				setTimeout(()=> {setBr(brr)}, 1000);
+			}
+		}
+		
+		
+	}, [br]);
+	
+	console.log("renderam StartEkran " + Math.random());
+	
+	function ispis(broj) {
+		if (broj === 0) return "GO!";
+		return broj;
+	}
+	
+	
+	return (
+	    <div ref={r} className="gameover-ekran">
+	        <p className="gameover-ekran-naslov1">{ispis(br)}</p>
+	    </div>
+	)
+}
+
+var StartEkran = React.memo(StartEkra);
 
 class Display extends React.Component {
 	constructor(props) {
@@ -63,11 +120,14 @@ class Display extends React.Component {
 		
 		this.state = {
 			polja: this.inicirajPolje(_visinaDisplaya, _sirinaDisplaya, 0),
-			gameOverSw: false, 
-			score: 0
+			gameOverSw: false,            //  za true se otvara gameover ekran
+			startSw: false,               //  za true se otvara start ekran sa startnom sekvencom
+			score: 0,
+			bestScore: 0
 		}
 		
 		this.engine = new Engine(_visinaDisplaya, _sirinaDisplaya, this);
+		this.gameStartKlik = this.gameStartKlik.bind(this);
 		
 		//this.promijeniPolje = this.promijeniPolje.bind(this);
 		
@@ -155,7 +215,7 @@ class Display extends React.Component {
 				}
 			}
 		}
-	}
+	}Skretanje
 	
 
 		
@@ -170,17 +230,23 @@ class Display extends React.Component {
 	    }
 	    return rez;
     }
+    
+    gameStartKlik() {
+		this.setState({gameOverSw: false, score: 0}); 
+		this.engine.startaj();
+	}
 	
 	render() {
 		return (
 		    <div ref={(e) => {this._div1 = e}} id="okvir">
 		        <div id="display-el">
 		            <DisplayBodova tekst="SCORE:" bodovi={this.state.score}/>
-		            <DisplayBodova tekst="BEST:" bodovi={0}/>
+		            <DisplayBodova tekst="BEST:" bodovi={this.state.bestScore}/>
 		        </div>
 		        <div ref={(e) => {this._div2 = e}} id="display">
 		        </div>
-		        <GameOverEkran sw={this.state.gameOverSw} klik={() => {this.setState({gameOverSw: false, score: 0}); this.engine.startaj()}}/>
+		        <GameOverEkran sw={this.state.gameOverSw} klik={this.gameStartKlik}/>
+		        <StartEkran sw={this.state.startSw}/>
 		    </div>
 		)
 	} 
