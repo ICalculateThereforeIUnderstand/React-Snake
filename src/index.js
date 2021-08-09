@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Engine from "./engine.js";
-import {dodajStilove, kreirajSkretanje, kreirajMetu, kreirajGlavu, ukloniDijete} from "./pomocneFunkcije.js";
+import {dodajStilove, kreirajTijelo, kreirajZaokret, kreirajMetu, kreirajGlavu, ukloniDijete} from "./pomocneFunkcije.js";
 
 var _sirinaPolja = 25;
 var _visinaDisplaya = 20;
@@ -30,17 +30,6 @@ function DisplayBodov({tekst, bodovi}) {
 }
 
 var DisplayBodova = React.memo(DisplayBodov);
-
-function Skretanje() {
-	return (
-	    <div className="skretanje">
-	        <div className="skretanje-el"></div>
-	        <div className="skretanje-el1"></div>
-	        <div className="skretanje-el2"></div>
-	        <div className="skretanje-el3"></div>
-	    </div>
-	)
-}
 
 function GameOverEkra({sw, klik}) {
 	const  r = React.useRef();
@@ -165,6 +154,7 @@ class Display extends React.Component {
 	}
 	
 	componentDidUpdate(prevProps, prevState) {
+		//console.log("upravo updejtam " + Math.random());
 	    for (let i = 0; i < this.state.polja.length; i++) {
 			for (let j = 0; j < this.state.polja[0].length; j++) {
 				if (prevState.polja[i][j] !== this.state.polja[i][j]) {
@@ -174,14 +164,11 @@ class Display extends React.Component {
 						case (0):  // ovo je slucaj praznog polja
 						    dodajStilove(this._div2.children[i * _sirinaDisplaya + j], {backgroundColor:"#444444"});   
 						    break;
-					    case (1):  // ovo je slucaj tijela zmije
-					        //console.log("mjenjam polje " + j + ", " + i);
-					        //console.log(this._div2.children[0]);
-					        //this._div2.children[6].style.backgroundColor = "pink";
-					        dodajStilove(this._div2.children[i * _sirinaDisplaya + j], {backgroundColor:"#64f227"});   
+					    case (1):  // ovo je slucaj horizontalnog djela tijela zmije
+					        kreirajTijelo(this._div2.children[i * _sirinaDisplaya + j], true); 
 					        break;
-					    case (2):  //  ovo je slucaj mete
-					        kreirajMetu(this._div2.children[i * _sirinaDisplaya + j]);
+					    case (2):  //  ovo je slucaj vertikalnog djela tijela zmije
+					        kreirajTijelo(this._div2.children[i * _sirinaDisplaya + j], false);
 					        break;
 					    case (3): // ovo je slucaj glave okrenute prema gore
 					        kreirajGlavu(this._div2.children[i * _sirinaDisplaya + j], "g");
@@ -194,28 +181,33 @@ class Display extends React.Component {
 					        break; 
 					    case (6): // ovo je slucaj glave okrenute prema lijevo
 					        kreirajGlavu(this._div2.children[i * _sirinaDisplaya + j], "l");
-					        break;   
-					    
+					        break;   	    
 					    case (7): // ovo je slucaj zakrivljenja tijela od gore nalijevo
-					        console.log("kreiram zakrivljenje1");
-					        kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "g");
+					        kreirajZaokret(this._div2.children[i * _sirinaDisplaya + j], "g");
+					        //kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "g");
 					        break;    
 					    case (8): // ovo je slucaj zakrivljenja tijela od desno nalijevo
-					        kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "d");
+					        kreirajZaokret(this._div2.children[i * _sirinaDisplaya + j], "d");
+					        //kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "d");
 					        break;    
 					    case (9): // ovo je slucaj zakrivljenja tijela od dolje nalijevo
-					        kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "do");
+					        kreirajZaokret(this._div2.children[i * _sirinaDisplaya + j], "do");
+					        //kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "do");
 					        break; 
 					    case (10): // ovo je slucaj zakrivljenja tijela od lijevo nalijevo
-					        kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "l");
+					        kreirajZaokret(this._div2.children[i * _sirinaDisplaya + j], "l");
+					        //kreirajSkretanje(this._div2.children[i * _sirinaDisplaya + j], "l");
 					        break;  
+					    case (11):  //  ovo je slucaj mete
+					        kreirajMetu(this._div2.children[i * _sirinaDisplaya + j]);
+					        break;
 					    default:
 					        alert("cini se da imas krivi kod");
 				    }
 				}
 			}
 		}
-	}Skretanje
+	}
 	
 
 		
@@ -257,9 +249,6 @@ class Display extends React.Component {
 
 ReactDOM.render(
     <>
-        <div id="pokus">
-            <Skretanje/>
-        </div>
         <Display/>
     </>,
     document.querySelector("#root")

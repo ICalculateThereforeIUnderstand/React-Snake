@@ -47,6 +47,13 @@
   color: #a16a05;
 }
 
+.pozadina {
+  height: 100%;
+  width: 100%;
+  background-color: #444444;
+  position: relative;
+}
+
 .meta {
   height: 100%;
   width: 100%;

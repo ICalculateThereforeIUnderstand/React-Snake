@@ -60,6 +60,13 @@ $boja-tijela: #64f227;
     
 }
 
+.pozadina {
+    height: 100%;
+    width: 100%;
+    background-color: $boja-displaya;
+    position: relative;
+}
+
 .meta {
     height: 100%;
     width: 100%;

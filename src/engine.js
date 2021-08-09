@@ -54,10 +54,10 @@ class Engine {
 		    /*setTimeout(() => {
 		        this.postaviZmiju();
 		    }, [10]);*/
-		    this.intervalRef = setInterval(this.pomakniZmiju, 80);
+		    this.intervalRef = setInterval(this.pomakniZmiju, 80);  // dobar interval je 80 msec
 	    //}, 10); 
 	  }, 4100);   
-	    	
+	
 	}
 	
 	postaviMetu() {
@@ -66,8 +66,8 @@ class Engine {
 			this.pozicijaMete = [Math.floor(Math.random()*this.sirinaDisplaya), Math.floor(Math.random()*this.visinaDisplaya)];
 		}
 		
-		console.log("metu postavljamo na " + [...this.pozicijaMete, 2]);
-		this.promijeniPolje([[...this.pozicijaMete, 2]]);
+		console.log("metu postavljamo na " + [...this.pozicijaMete, 11]);
+		this.promijeniPolje([[...this.pozicijaMete, 11]]);
 	}
 	
 	pomakniZmiju() {
@@ -159,8 +159,48 @@ class Engine {
 		        x2 = this.stanjeZmije[i+1][0];
 		        y2 = this.stanjeZmije[i+1][1];
 		        
-		        if (x1 < x2) {
-					if (y1 < y2) {
+		        if (x1 === 0  &&  x2 === this.sirinaDisplaya - 1) {
+					if (y1 > y2) {
+						if (x === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],9]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],7]);
+						}
+					} else {
+						if (x === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],10]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],8]);
+						}
+					}
+		        } else if (x2 === 0  &&  x1 === this.sirinaDisplaya - 1) {
+					if (y1 > y2) {
+						if (x === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],10]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],8]);
+						}
+					} else {
+						if (x === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],9]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],7]);
+						}
+					}
+		        } else if (x1 < x2) {
+					if (y1 === 0  &&  y2 === this.visinaDisplaya - 1) {
+						if (y === 0) {
+					        pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],10]);
+					    } else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],8]);
+						}
+					} else if (y2 === 0  &&  y1 === this.visinaDisplaya - 1) {
+						if (y === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],7]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],9]);
+						}
+					} else if (y1 < y2) {
 						if (x > x1) {
 						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],9]);
 						} else {
@@ -176,9 +216,21 @@ class Engine {
 						}
 					}
 				} else if (x1 === x2) {
-			        pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],1]);		
-				} else {
-					if (y1 < y2) {
+			        pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],2]);		
+				} else {  // x1 > x2
+					if (y1 === 0  &&  y2 === this.visinaDisplaya - 1) {
+						if (y === 0) {
+					        pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],7]);
+					    } else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],9]);
+						}
+					} else if (y2 === 0  &&  y1 === this.visinaDisplaya - 1) {
+						if (y === 0) {
+						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],10]);
+						} else {
+							pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],8]);
+						}
+					} else if (y1 < y2) {
 						if (x < x1) {
 						    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],8]);
 						} else {
@@ -195,7 +247,13 @@ class Engine {
 					}
 				}
 		    } else {
-			    pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],1]);	
+				x1 = this.stanjeZmije[1][0];
+		        x = this.stanjeZmije[0][0];
+		        if (x === x1) {
+			        pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],2]);	
+			    } else {
+					pozicije.push([this.stanjeZmije[i][0],this.stanjeZmije[i][1],1]);
+				}
 			}
 		    
 		    
@@ -209,15 +267,31 @@ class Engine {
 		y2 = this.stanjeZmije[dulj-1][1];
 		
 		if (x1 < x2) {
-			pozicije.push([x2,y2,4]);
+			if (x1 === 0  &&  x2 === this.sirinaDisplaya-1) {
+				pozicije.push([x2,y2,6]);
+			} else {
+			    pozicije.push([x2,y2,4]);
+			}
 		} else if (x1 === x2) {
 			if (y1 < y2) {
-			    pozicije.push([x2,y2,5]);	
+				if (y1 === 0  &&  y2 === this.visinaDisplaya-1) {
+			        pozicije.push([x2,y2,3]);	
+			    } else {
+					pozicije.push([x2,y2,5]);
+				}
 			} else {
-				pozicije.push([x2,y2,3]);
+				if (y2 === 0  &&  y1 === this.visinaDisplaya-1) {
+			        pozicije.push([x2,y2,5]);	
+			    } else {
+					pozicije.push([x2,y2,3]);
+				}
 			}
 		} else {
-			pozicije.push([x2,y2,6]);
+			if (x1 === this.sirinaDisplaya-1  &&  x2 === 0) {
+			    pozicije.push([x2,y2,4]);
+			} else {
+				pozicije.push([x2,y2,6]);
+			}
 		}
 		
 		this.promijeniPolje(pozicije);
